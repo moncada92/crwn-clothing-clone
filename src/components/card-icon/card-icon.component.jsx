@@ -9,7 +9,7 @@ import './cart-icon.styles.scss'
 
 const CardIcon = () => {
 
-  const { isCardShow, setIsCardShow } = useContext(CartContext)
+  const { isCardShow, setIsCardShow, cartCounter } = useContext(CartContext)
 
   const handlerShowCart = () => {
     setIsCardShow(!isCardShow)
@@ -18,7 +18,7 @@ const CardIcon = () => {
   return (
     <div className='cart-icon-container ' onClick={handlerShowCart}>
       <ShoppingIcon  className='shopping-icon'/>
-      <span className='item-count'>0</span>
+      <span className='item-count'>{ cartCounter }</span>
     </div>
   );
 };

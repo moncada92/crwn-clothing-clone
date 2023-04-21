@@ -41,7 +41,6 @@ const INITIAL_VALUE = {
 
 const addCardItem = (cartItems, productToAdd) => {
 
-
   const isExistInCart = cartItems.find((cartItem) => cartItem.id === productToAdd.id)
 
   if(isExistInCart) {
@@ -100,6 +99,7 @@ export const CardProvider = ({children}) => {
   const [{cartItems, isCardShow, cartCounter, totalPriceCart}, dispatch] = useReducer(CartReducer, INITIAL_VALUE);
 
   const addItemToCard = (productToCard) => {
+    debugger;
     const newCartItems = addCardItem(cartItems, productToCard )
     updateCartItemsReducer(newCartItems)
   }

@@ -2,18 +2,18 @@ import { Link, Outlet } from "react-router-dom";
 import { NavigationContainer, LogoContainer, NavLinks, NavLink } from './navigation.styles'
 
 import {ReactComponent as Crwn} from "../../assets/crown.svg";
-import { useContext } from "react";
-import { UserContex } from "../../context/user.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 import CardIcon from "../../components/card-icon/card-icon.component";
 import CartDropDown from "../../components/cart-dropdown/cart-dropdown.component";
-import { CartContext } from "../../context/cart.context";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user.selector";
+import { selectIsCartOpen } from "../../store/cart/cart.selector";
 
 
 const Navigation = () => {
 
-  const { currentUser } = useContext(UserContex)
-  const { isCardShow } = useContext(CartContext)
+  const isCartOpen = useSelector(selectIsCartOpen);
+  const currentUser = useSelector(selectCurrentUser)
 
   const handlerSignOut = async () => {
     await signOutUser()
@@ -36,7 +36,7 @@ const Navigation = () => {
           }
           <CardIcon />
         </NavLinks>
-        {isCardShow && <CartDropDown /> }
+        {isCartOpen && <CartDropDown /> }
       </NavigationContainer>
       <Outlet />
     </>

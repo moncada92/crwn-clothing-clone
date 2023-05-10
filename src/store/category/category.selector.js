@@ -2,14 +2,12 @@ import { createSelector } from "reselect";
 
 
 const selectorCategoryReducer = (state) => {
-  console.log('selector fired 1')  
   return state.categories;
 }
 
 export const selectorCategories = createSelector(
   [selectorCategoryReducer],
   (categoriesSlice) => {
-    console.log('selector fired 2')
     return categoriesSlice.categories  
   }
 )
@@ -17,7 +15,6 @@ export const selectorCategories = createSelector(
 export const selectCategoriesMap = createSelector(
   [selectorCategories],
   (categories) => {
-    console.log('selector fired 3')
     return categories.reduce((acc, snapshot) => {
       const {title, items} = snapshot;
       acc[title.toLowerCase()] = items;
@@ -25,3 +22,8 @@ export const selectCategoriesMap = createSelector(
     }, {});  
   }
 );
+
+export const selectCategoriesIsLoading = createSelector(
+  [selectorCategoryReducer],
+  (categoriesSlice) => categoriesSlice.isLoadding
+)
